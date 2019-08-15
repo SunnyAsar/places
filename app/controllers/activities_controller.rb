@@ -18,12 +18,16 @@ class ActivitiesController < ApplicationController
     if @activity.save
       render json: @activity, status: :ok
     else
-      render json: { errors: @activity.errors.full_message }, status: :unprocessable_entity
+      render json: { errors: @activity.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @activity.destroy
+   if @activity.destroy
+    render json: @activity, status: :ok
+   else
+    render json: { errors: @activity.errors }, status: :unprocessable_entity
+   end
   end
 
   private
@@ -31,6 +35,6 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
   end
   def activity_params
-    params.require(:activity).permit(:name, :description, :country, :city, :category_id)
+    params.require(:activity).permit(:name, :description, :country, :city, :category_id, images:[])
   end
 end

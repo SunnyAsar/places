@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
     if @category.save
       render json: @category, status: :ok
     else
-      render json: { errors: @category.errors.full_message }, status: :unprocessable_entity
+      render json: { errors: @category.errors }, status: :unprocessable_entity
     end
   end
 
@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
     if @category.destroy
       render json: @category, status: :ok
     else
-      render json: { error: @category.errors.full_message }, status: :unauthorized
+      render json: { error: @category}, status: :unauthorized
     end
   end
 
