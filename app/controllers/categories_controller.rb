@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authorize_request, except: [:index]
+  before_action :set_category, except: [:index, :create]
 
   def index
     @categories = Category.all
@@ -8,6 +9,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    @category.user_id = @current_user.id
     if @category.save
       render json: @category, status: :ok
     else
@@ -17,20 +19,21 @@ class CategoriesController < ApplicationController
 
   def destroy
     if @category.destroy
-      render json: 'destroyed', status: :ok  
+      render json: @category, status: :ok
     else
       render json: { error: @category.errors.full_message }, status: :unauthorized
     end
   end
-  
-private
 
+
+
+private
   def category_params
     params.require(:category).permit(:name)
   end
 
   def set_category
-    @category = Category.find(:id)  
+    @category = Category.find(params[:id])
   end
 
 end
