@@ -7,5 +7,5 @@ class Activity < ApplicationRecord
   validates :description, presence: true
   validates :country, presence: true
   validates :city, presence: true
-  validates :category_id, presence: true  
+  validates :category_id, presence: true
 end

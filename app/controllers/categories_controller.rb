@@ -1,3 +1,5 @@
+# some cat
+
 class CategoriesController < ApplicationController
   before_action :authorize_request, except: [:index]
   before_action :set_category, except: [:index, :create]
@@ -21,13 +23,12 @@ class CategoriesController < ApplicationController
     if @category.destroy
       render json: @category, status: :ok
     else
-      render json: { error: @category}, status: :unauthorized
+      render json: { error: @category }, status: :unauthorized
     end
   end
 
-
-
 private
+
   def category_params
     params.require(:category).permit(:name)
   end
@@ -35,5 +36,4 @@ private
   def set_category
     @category = Category.find(params[:id])
   end
-
 end
