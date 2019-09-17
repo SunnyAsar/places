@@ -3,7 +3,7 @@ class Activity < ApplicationRecord
   belongs_to :category
   has_many_attached :images
 
-  validates :name, presence: true, uniqueness: true, length: { minimum: 10 }
+  validates :name, presence: true, uniqueness: true, length: { minimum: 4 }
   validates :description, presence: true
   validates :country, presence: true
   validates :city, presence: true

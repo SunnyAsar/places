@@ -1,5 +1,12 @@
+# class comme
 class UsersController < ApplicationController
-  # before_action :authorize_request, excep: [:create]
+  before_action :authorize_request, except: [:create]
+  before_action :set_user, only: [:show]
+
+  def index
+    @users = User.all
+    render json: @users, status: :ok
+  end
 
   def create
     @user = User.new(user_params)
@@ -16,8 +23,8 @@ class UsersController < ApplicationController
 
   private
 
-  def find_user
-    @user = User.find(user_params[:id])
+  def set_user
+    @user = User.find(params[:id])
   end
 
   def user_params
