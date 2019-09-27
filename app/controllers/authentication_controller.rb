@@ -10,7 +10,14 @@ class AuthenticationController < ApplicationController
       time = Time.now + 24.hours.to_i
       render json: { token: token, exp: time, user: @user }, status: :ok
     else
-      render json: { error: 'unauthorized' }, status: :unauthorized
+      error = {}
+      if params[:email].blank? || params[:password].blank?
+        error['email'] =  "email can't be blank" unless params[:email].present?
+        error['password'] = "password can't be blank" if params[:password].blank?
+      else
+        error['general'] = 'Invalid Email or Password'
+      end
+        return render json: error, status: :unauthorized
     end
   end
 

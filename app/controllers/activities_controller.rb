@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :authorize_request
+  # before_action :authorize_request
   before_action :set_activity, only: %i[show destroy]
 
   def index
