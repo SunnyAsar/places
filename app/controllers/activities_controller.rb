@@ -1,10 +1,10 @@
 class ActivitiesController < ApplicationController
-  # before_action :authorize_request
+  before_action :authorize_request
   before_action :set_activity, only: %i[show destroy]
 
   def index
-    @activities = Activity.all.with_attached_images
-    render json: @activities, status: :ok
+    @activities = Activity.all.sample(9)
+    render :index, status: :ok
   end
 
   def show
@@ -31,12 +31,16 @@ class ActivitiesController < ApplicationController
 
   private
 
+  def meal_json(meal)
+    meal.as_json.merge(photos: meal.photos.map { |photo| url_for(photo) })
+  end
+
   def set_activity
     @activity = Activity.find(params[:id])
   end
 
   def activity_params
     params.require(:activity).permit(:name, :description, :country,
-                                     :city, :category_id, images: [])
+                                     :city, :category_id, :thumbnail, images: [])
   end
 end

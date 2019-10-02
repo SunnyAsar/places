@@ -1,6 +1,7 @@
 # clsass
 class ApplicationController < ActionController::API
   attr_reader :current_user
+  before_action :set_default_request_format
 
   def not_found
     render json: { error: 'not_found' }
@@ -19,4 +20,9 @@ class ApplicationController < ActionController::API
     end
   end
 
+  private
+
+  def set_default_request_format
+    request.format = :json unless params[:format]
+  end
 end
