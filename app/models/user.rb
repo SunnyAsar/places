@@ -11,5 +11,4 @@ class User < ApplicationRecord
   has_many :activities, foreign_key: :owner_id
   has_many :categories
   has_many :comments, foreign_key: :commenter_id
-  has_many :likes, foreign_key: :liker_id
 end

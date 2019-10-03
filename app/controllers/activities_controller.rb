@@ -31,10 +31,6 @@ class ActivitiesController < ApplicationController
 
   private
 
-  def meal_json(meal)
-    meal.as_json.merge(photos: meal.photos.map { |photo| url_for(photo) })
-  end
-
   def set_activity
     @activity = Activity.find(params[:id])
   end

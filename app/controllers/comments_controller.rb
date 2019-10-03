@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :comment_params
+  before_action :comment_params, only: [:update, :create]
+  before_action :set_comment, only: [:update, :destroy]
   before_action :authorize_request
 
   def create
@@ -23,7 +24,7 @@ class CommentsController < ApplicationController
     if @comment.destroy
       render json: @comment, status: :ok
     else
-      render json: {errors: @comment.errors}, status: :unprocessable_entity
+      render json: { errors: @comment.errors }, status: :unprocessable_entity
     end
   end
 
