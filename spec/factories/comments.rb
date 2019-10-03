@@ -1,7 +1,11 @@
 FactoryBot.define do
   factory :comment do
-    content { "MyText" }
-    commenter_id { "" }
-    activity { nil }
+    content { Faker::Quote.matz }
+    owner
+    activity
+
+    factory :invalid_comment do
+      content {''}
+    end
   end
 end

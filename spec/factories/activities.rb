@@ -7,7 +7,7 @@ FactoryBot.define do
     category
     owner
 
-    factory :invalid_activity do 
+    factory :invalid_activity do
       name { '' }
       description { '' }
     end
