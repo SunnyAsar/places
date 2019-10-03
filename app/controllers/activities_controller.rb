@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    render json: @activity
+    render :show, status: :ok
   end
 
   def create
