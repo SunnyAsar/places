@@ -5,5 +5,6 @@
   json.city activity.city
   json.created_at activity.created_at
   json.category activity.category.name
+  json.likesCount activity.likes.pluck(:id)
+  json.commentsCount activity.comments.count
   json.thumbnail url_for(activity.thumbnail)
-  json.images activity.images.map{|image| url_for(image)}
