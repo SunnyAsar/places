@@ -3,7 +3,7 @@ class LikesController < ApplicationController
   before_action :authorize_request
 
   def create
-    @like = current_user.likes.build(likes_params)
+    @like = @current_user.likes.build(likes_params)
     if @like.save
       render json: @like, status: :ok
     else
@@ -23,6 +23,6 @@ class LikesController < ApplicationController
   private
 
   def likes_params
-    params.require(:like).permit(:likable_id, :likable_type)
+    params.require(:like).permit(:likeable_id, :likeable_type)
   end
 end
