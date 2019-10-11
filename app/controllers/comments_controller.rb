@@ -3,10 +3,17 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:update, :destroy]
   before_action :authorize_request
 
+  def index
+    @comments = Comment.where(activity_id: params[:activity_id])
+    render :index, status: :ok
+  end
+
   def create
     @comment = current_user.comments.build(comment_params)
+    @comment.activity_id = params[:activity_id]
+    p @comment
     if @comment.save
-      render json: @comment, status: :ok
+      render :show, status: :ok
     else
       render json: { errors: @comment.errors }, status: :unprocessable_entity
     end
@@ -31,7 +38,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:content, :activity_id)
+    params.require(:comment).permit(:content)
   end
 
   def set_comment

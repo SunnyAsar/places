@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :authorize_request
-  before_action :set_activity, only: %i[show destroy]
+  before_action :set_activity, only: %i[show destroy update]
 
   def index
     @activities = Activity.all.sample(9)
@@ -13,8 +13,17 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = current_user.activities.build(activity_params)
+    @activity.images.attach(params[:activity][:images])
     if @activity.save
-      @activity.images.attach(params[:activity][:images])
+      render json: @activity, status: :ok
+    else
+      render json: { errors: @activity.errors }, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @activity.update_attributes(activity_params)
+      # @activity.images.attach(params[:activity][:images])
       render json: @activity, status: :ok
     else
       render json: { errors: @activity.errors }, status: :unprocessable_entity
