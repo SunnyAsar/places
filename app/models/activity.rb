@@ -5,6 +5,7 @@ class Activity < ApplicationRecord
   has_one_attached :thumbnail, dependent: :destroy
   has_many :likes, as: :likeable
   has_many :comments
+  has_many :reservations
 
   validates :name, presence: true, uniqueness: true, length: { minimum: 4 }
   validates :description, presence: true

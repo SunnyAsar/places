@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :categories
   has_many :comments, foreign_key: :commenter_id
   has_many :likes, foreign_key: :liker_id, dependent: :destroy
+  has_many :reservations
 end

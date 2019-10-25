@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_03_121424) do
+ActiveRecord::Schema.define(version: 2019_10_25_191227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2019_10_03_121424) do
     t.uuid "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "amount", default: "1.0"
     t.index ["category_id"], name: "index_activities_on_category_id"
   end
 
@@ -75,6 +76,21 @@ ActiveRecord::Schema.define(version: 2019_10_03_121424) do
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
   end
 
+  create_table "reservations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "reservation_id"
+    t.integer "party_size"
+    t.decimal "total_amount"
+    t.text "info"
+    t.uuid "activity_id", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "payment_status"
+    t.datetime "reservation_date"
+    t.index ["activity_id"], name: "index_reservations_on_activity_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -91,4 +107,6 @@ ActiveRecord::Schema.define(version: 2019_10_03_121424) do
   add_foreign_key "activities", "users", column: "owner_id"
   add_foreign_key "categories", "users"
   add_foreign_key "comments", "activities"
+  add_foreign_key "reservations", "activities"
+  add_foreign_key "reservations", "users"
 end
