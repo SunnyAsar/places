@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_10_25_191227) do
     t.uuid "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "amount", default: "1.0"
+    t.decimal "amount", default: "0.0"
     t.index ["category_id"], name: "index_activities_on_category_id"
   end
 
