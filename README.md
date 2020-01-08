@@ -1,9 +1,8 @@
 # Places
-Places, the best activities and experience finder for travellers.
+Places, the best activities and experience finder for travelers.
 
 <!-- ![screenshot](./public/detail.png) -->
-
-Places is an app to assit travelers, tourist or digital normads find new activities and experiences in cities they find themselves in and also give them the best price deals.
+Places is an app to assist travelers, tourist or digital nomads find new activities and experiences in cities they find themselves in and also give them the best price deals.
 
 This repo containst the backend Api supporting the [FrontEnd](https://github.com/SunnyAsar/places-front-end)
 
@@ -15,9 +14,6 @@ This repo containst the backend Api supporting the [FrontEnd](https://github.com
 
 
 ## Getting Started
-
-**This is what needs to be done to  on set up this project locally.**
-
 
 To get a local copy up and running follow these simple example steps.
 
@@ -31,11 +27,11 @@ See the [Backend](https://github.com/SunnyAsar/places) repo to get the server si
 `Clone the project and cd into the directory`
 
 ### Install
-run `bundle install` to install all the dependencies of the project
+run `bundle install` to install all the dependencies of the project.
 
-run  `rails db:create` to create a new database for the project
+run  `rails db:create` to create a new database for the project.
 
-run `rails db:migrate` to get the migration schema setup in the new tables in the database. 
+run `rails db:migrate` to get the migration schema setup in the database.
 
 ### Usage
 run `rails s` to get the project running
@@ -46,13 +42,13 @@ run `rails s` to get the project running
 👤 **Author**
 
 - Github: [@SunnyAsar](https://github.com/SunnyAsar)
-- Linkedin: [Sunny Asar](https://www.linkedin.com/in/sunny-asar-905648101/)
+- Linkedin: [Sunny Asar](https://www.linkedin.com/in/sunnyasar/)
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/SunnyAsar/places/issues).
 
 ## Show your support
 
