@@ -1,6 +1,6 @@
 # class comme
 class UsersController < ApplicationController
-  # before_action :authorize_request, except: [:create]
+  before_action :authorize_request, except: [:create]
   before_action :set_user, only: [:show]
 
   def index
@@ -21,6 +21,9 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def user
+    render json: current_user, status: :ok
+  end
   private
 
   def set_user

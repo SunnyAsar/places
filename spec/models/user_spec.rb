@@ -24,9 +24,16 @@ RSpec.describe User, type: :model do
 
     describe 'user with actvities' do
       it 'checks count' do
-        user = create(:user_with_activities, activity_count:4)
+        user = create(:user_with_activities, activity_count: 4)
         expect(user.activities.count).to eq(4)
       end
     end
+
+    # describe 'user with comments' do
+    #   it 'checks comment count' do
+    #     user = create(:user_with_comments, comment_count: 3)
+    #     expect(user.comments.count).to eq(3)
+    #   end
+    # end
   end
 end
