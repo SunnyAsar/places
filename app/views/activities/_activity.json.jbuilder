@@ -3,6 +3,7 @@
   json.description activity.description
   json.country activity.country
   json.city activity.city
+  json.amount activity.amount
   json.created_at activity.created_at
   json.category activity.category.name
   json.likeCount activity.likes.count
