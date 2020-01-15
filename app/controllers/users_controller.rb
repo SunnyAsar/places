@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def user
-    render json: current_user, status: :ok
+    render json: @current_user, status: :ok
   end
   private
 

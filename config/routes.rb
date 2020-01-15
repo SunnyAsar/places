@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # get 'reservations/search'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users
-  get '/user', to: 'users#user'
+  get '/user', to: 'users#user', :defaults => { :format => :json }
   resources :categories
   resources :activities do
     resources :comments
