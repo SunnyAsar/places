@@ -9,4 +9,4 @@
   json.likeCount activity.likes.count
   json.commentCount activity.comments.count
   # json.thumbnail rails_blob_path(activity.thumbnail, only_path: true)
-  json.thumbnail url_for(activity.thumbnail)
+json.thumbnail url_for(activity.thumbnail) if activity.thumbnail

@@ -12,8 +12,9 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = current_user.activities.build(activity_params)
-    @activity.images.attach(params[:activity][:images])
+    @activity = current_user.activities.create(activity_params)
+    # @activity.images.attach(params[:activity][:images])
+    # @activity.thumbnail.attach(params[:activity][:thumbnail])
     if @activity.save
       render json: @activity, status: :ok
     else
@@ -42,6 +43,7 @@ class ActivitiesController < ApplicationController
 
   def set_activity
     @activity = Activity.find(params[:id])
+
   end
 
   def activity_params
@@ -49,3 +51,4 @@ class ActivitiesController < ApplicationController
                                      :city, :category_id, :thumbnail, images: [])
   end
 end
+

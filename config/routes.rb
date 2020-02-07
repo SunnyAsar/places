@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users
   get '/user', to: 'users#user', :defaults => { :format => :json }
   resources :categories
-  resources :activities do
+  resources :activities, :defaults => { :format => :json } do
     resources :comments
   end
   resources :likes, only: [:create, :destroy]
