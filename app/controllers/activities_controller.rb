@@ -13,8 +13,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = current_user.activities.create(activity_params)
-    # @activity.images.attach(params[:activity][:images])
-    # @activity.thumbnail.attach(params[:activity][:thumbnail])
+
     if @activity.save
       render json: @activity, status: :ok
     else
