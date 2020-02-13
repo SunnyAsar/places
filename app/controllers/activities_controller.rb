@@ -3,7 +3,7 @@ class ActivitiesController < ApplicationController
   before_action :set_activity, only: %i[show destroy update]
 
   def index
-    @activities = Activity.all.sample(9)
+    @activities = Activity.all.sample(15)
     render :index, status: :ok
   end
 
@@ -13,8 +13,8 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = current_user.activities.create(activity_params)
-
     if @activity.save
+      @activity.images.attach(params[:activity][:images])
       render json: @activity, status: :ok
     else
       render json: { errors: @activity.errors }, status: :unprocessable_entity
@@ -50,4 +50,5 @@ class ActivitiesController < ApplicationController
                                      :city, :category_id, :thumbnail, images: [])
   end
 end
+
 
