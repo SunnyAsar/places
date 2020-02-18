@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :likes, only: [:create, :destroy]
-  resources :reservations, only: [:create, :index, :search]
+  resources :reservations, :defaults => { :format => :json }
 
   post '/auth/login', to: 'authentication#login'
   # get '/*a', to: 'application#not_found'

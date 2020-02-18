@@ -31,14 +31,13 @@ class ReservationsController < ApplicationController
           currency: 'usd',
           quantity: data.party_size,
         }],
-        success_url: 'http://localhost:3000',
+        # success_url: 'http://localhost:3000',
+        success_url: update_reservation_path data.activity,
         cancel_url: 'http://localhost:3000/activities/'+data.activity.id,
       )
   end
 
-  def search
-  end
-
+  def update
 
   private
 
