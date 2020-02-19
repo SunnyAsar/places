@@ -1,5 +1,5 @@
 class Activity < ApplicationRecord
-  belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: 'User', counter_cache: true
   belongs_to :category
   has_many_attached :images, dependent: :destroy
   has_one_attached :thumbnail, dependent: :destroy
