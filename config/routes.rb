@@ -1,18 +1,20 @@
-Rails.application.routes.draw do
- 
-  # get 'reservations/index'
-  # get 'reservations/create'
-  # get 'reservations/search'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :users
-  get '/user', to: 'users#user', :defaults => { :format => :json }
-  resources :categories
-  resources :activities, :defaults => { :format => :json } do
-    resources :comments
-  end
-  resources :likes, only: [:create, :destroy]
-  resources :reservations, :defaults => { :format => :json }
+#Routing
 
-  post '/auth/login', to: 'authentication#login'
-  # get '/*a', to: 'application#not_found'
-end
+Rails.application.routes.draw do
+  defaults format: :json do
+    resources :users
+    get '/user', to: 'users#user'
+    resources :categories
+    resources :activities do
+      resources :comments
+    end
+    resources :likes, only: [:create, :destroy]
+    resources :reservations do
+      post 'complete_reservation', to: 'reservation#complete_reservation', as: 'complete_reservation'
+    end
+
+    post '/auth/login', to: 'authentication#login'
+    # get '/*a', to: 'application#not_found'
+  end
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  end
