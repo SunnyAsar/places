@@ -1,18 +1,19 @@
 class ReservationsController < ApplicationController
   before_action :authorize_request
   before_action :reservation_params
+  before_action :set_reservation, only: [:update]
 
   def index
-    @reservation = Reservation.all
+    reservation = Reservation.all
   end
 
   def create  
-    @reservation = current_user.reservations.build(reservation_params)
-    @reservation.total_amount = reservation_params[:party_size].to_i * Activity.find(reservation_params[:activity_id]).amount || 2
-    @reservation.payment_status = 1
-    if @reservation.save
-      @token = stripe_tokenization(@reservation)
-      reservation = Reservation.find @reservation.id
+    reservation = current_user.reservations.build(reservation_params)
+    reservation.total_amount = reservation_params[:party_size].to_i * Activity.find(reservation_params[:activity_id]).amount || 2
+    reservation.payment_status = 1
+    if reservation.save
+      @token = stripe_tokenization(reservation)
+      reservation = Reservation.find reservation.id
       reservation.reservation_id = @token.id
       reservation.save
       render json: @token, status: :ok
@@ -43,11 +44,18 @@ class ReservationsController < ApplicationController
       )
   end
 
-  def update;end
+  def update
+    @reservation.payment_status = 2
+    @reservation.save
+  end
 
   private
 
   def reservation_params
     params.require(:reservation).permit(:activity_id, :party_size, :reservation_date, :info)
+  end
+
+  def set_reservation
+    @reservation = Reservation.find_by(reservation_id: params[:id])
   end
 end
