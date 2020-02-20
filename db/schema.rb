@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2020_02_19_202728) do
     t.uuid "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "payment_status"
+    t.integer "payment_status",default: 1
     t.datetime "reservation_date"
     t.index ["activity_id"], name: "index_reservations_on_activity_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"

@@ -7,21 +7,18 @@ class ReservationsController < ApplicationController
     reservation = Reservation.all
   end
 
-  def create  
+  def create
     reservation = current_user.reservations.build(reservation_params)
-    reservation.total_amount = reservation_params[:party_size].to_i * Activity.find(reservation_params[:activity_id]).amount || 2
-    reservation.payment_status = 1
-    if reservation.save
-      @token = stripe_tokenization(reservation)
-      reservation = Reservation.find reservation.id
-      reservation.reservation_id = @token.id
-      reservation.save
+    booking = reservation.book
+    if booking.save
+      @token = stripe_tokenization(booking)
+      reservation = Reservation.find(booking.id)
+      reservation.update_reservation(@token.id)
       render json: @token, status: :ok
     else
 
     end
   end
-
 
   def complete_reservation
     puts params
